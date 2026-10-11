@@ -51,7 +51,7 @@ Often-empty phrases: it's worth noting, it's important to note, at the end of th
 
 ## Patterns to cut
 
-**Binary contrasts.** "This is not X. It's Y." / "The question isn't X, it's Y." / "It's not just X but Y." State Y directly. "The question isn't the model. It's the eval." becomes "The eval matters more than the model."
+**Binary contrasts.** "This is not X. It's Y." / "The question isn't X, it's Y." / "It's not just X but Y." State Y directly. "The question isn't the model. It's the data." becomes "The data matters more than the model."
 
 **Throat-clearing openers.** "Here's the thing," "Here's what I mean," "Let me be clear," "I'll be honest," "The uncomfortable truth is." Cut them and state the point.
 
@@ -92,6 +92,6 @@ Often-empty phrases: it's worth noting, it's important to note, at the end of th
 1. Read the full draft before editing.
 2. Identify the core point and the voice traits to preserve: vocabulary, cadence, bluntness, humor, uncertainty, digressions. If you cannot identify the core point, ask the user.
 3. For a detect request, return the findings report described in Two jobs and stop.
-4. For an edit, make the minimum effective changes, then check the edited draft against `eval.md` yourself.
+4. For an edit, make the minimum effective changes, then check the edited draft against `checklist.md` yourself.
 5. If any check fails, fix the draft and run the checks again.
 6. Output the full edited draft and a short **What changed** section.

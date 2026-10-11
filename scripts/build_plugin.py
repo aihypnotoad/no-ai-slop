@@ -46,7 +46,7 @@ def validate_source(manifest: dict) -> None:
     if len(prompts) > 3 or any(len(prompt) > 128 for prompt in prompts):
         raise SystemExit("Starter prompts must contain at most three entries of 128 characters or fewer")
 
-    for source in (SKILL_ROOT / "SKILL.md", SKILL_ROOT / "eval.md", ROOT / "assets" / "no-ai-slop.png"):
+    for source in (SKILL_ROOT / "SKILL.md", SKILL_ROOT / "checklist.md", ROOT / "assets" / "no-ai-slop.png"):
         if not source.is_file():
             raise SystemExit(f"Missing package source: {source.relative_to(ROOT)}")
 
@@ -63,7 +63,7 @@ def build_plugin(manifest: dict) -> tuple[Path, Path]:
 
     shutil.copy2(MANIFEST, plugin_root / ".codex-plugin" / "plugin.json")
     shutil.copy2(SKILL_ROOT / "SKILL.md", skill_root / "SKILL.md")
-    shutil.copy2(SKILL_ROOT / "eval.md", skill_root / "eval.md")
+    shutil.copy2(SKILL_ROOT / "checklist.md", skill_root / "checklist.md")
     shutil.copy2(ROOT / "assets" / "no-ai-slop.png", plugin_root / "assets" / "no-ai-slop.png")
     shutil.copy2(ROOT / "LICENSE", plugin_root / "LICENSE")
     shutil.copy2(ROOT / "PRIVACY.md", plugin_root / "PRIVACY.md")
@@ -84,7 +84,7 @@ def validate_build(plugin_root: Path, archive: Path) -> None:
         ".codex-plugin/plugin.json",
         "assets/no-ai-slop.png",
         "skills/no-ai-slop/SKILL.md",
-        "skills/no-ai-slop/eval.md",
+        "skills/no-ai-slop/checklist.md",
         "LICENSE",
         "PRIVACY.md",
         "TERMS.md",
@@ -98,11 +98,11 @@ def validate_build(plugin_root: Path, archive: Path) -> None:
         raise SystemExit(f"Unexpected package files: expected {sorted(expected)}, found {sorted(actual)}")
 
     packaged_skill = plugin_root / "skills" / "no-ai-slop" / "SKILL.md"
-    packaged_eval = plugin_root / "skills" / "no-ai-slop" / "eval.md"
+    packaged_checklist = plugin_root / "skills" / "no-ai-slop" / "checklist.md"
     if packaged_skill.read_bytes() != (SKILL_ROOT / "SKILL.md").read_bytes():
         raise SystemExit("Packaged SKILL.md does not match the canonical file")
-    if packaged_eval.read_bytes() != (SKILL_ROOT / "eval.md").read_bytes():
-        raise SystemExit("Packaged eval.md does not match the canonical file")
+    if packaged_checklist.read_bytes() != (SKILL_ROOT / "checklist.md").read_bytes():
+        raise SystemExit("Packaged checklist.md does not match the canonical file")
     if not zipfile.is_zipfile(archive):
         raise SystemExit("Plugin archive is not a valid ZIP file")
 
